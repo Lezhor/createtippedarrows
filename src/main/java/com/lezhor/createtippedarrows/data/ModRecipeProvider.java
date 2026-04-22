@@ -16,5 +16,6 @@ public class ModRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(RecipeOutput output) {
         ModRecipes.generateTippedArrowRecipes(output);
+        ModRecipes.generateTippedArrowEmptyingRecipes(output);
     }
 }

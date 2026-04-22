@@ -14,6 +14,8 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.fluids.FluidStack;
+import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
+import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import net.neoforged.neoforge.fluids.crafting.DataComponentFluidIngredient;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
@@ -51,6 +53,42 @@ public static void generateTippedArrowRecipes(RecipeOutput consumer) {
                 .withItemIngredients(Ingredient.of(Items.ARROW))
                 .withFluidIngredients(new SizedFluidIngredient(DataComponentFluidIngredient.of(false, fluid), fluid.getAmount()))
                 .withSingleItemOutput(output)
+                .build(consumer);
+        });
+    }
+
+    /**
+     * This method iterates through all potions and generates an Item Drain emptying recipe for each.
+     */
+    public static void generateTippedArrowEmptyingRecipes(RecipeOutput consumer) {
+        int amount = 25;
+        try {
+            amount = Config.TIPPED_ARROW_REQUIRED_FILL_AMOUNT.get();
+        } catch (IllegalStateException e) {
+            // Config not loaded, use default
+        }
+
+        final int finalAmount = amount;
+        BuiltInRegistries.POTION.asHolderIdMap().forEach(potionHolder -> {
+            PotionContents contents = new PotionContents(potionHolder);
+
+            // Create the input Tipped Arrow
+            ItemStack inputStack = new ItemStack(Items.TIPPED_ARROW);
+            inputStack.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, contents);
+
+            // Define the fluid output
+            FluidStack fluid = PotionFluid.of(finalAmount, contents, PotionFluid.BottleType.REGULAR);
+
+            ResourceLocation potionId = potionHolder.getRegisteredName() != null 
+                ? ResourceLocation.parse(potionHolder.getRegisteredName()) 
+                : ResourceLocation.fromNamespaceAndPath(CreateTippedArrows.MODID, "dummy_" + potionHolder.hashCode());
+
+            // consumer = datagen
+            new StandardProcessingRecipe.Builder<>(EmptyingRecipe::new, 
+                ResourceLocation.fromNamespaceAndPath(CreateTippedArrows.MODID, "emptying_" + potionId.getPath()))
+                .withItemIngredients(DataComponentIngredient.of(false, inputStack))
+                .withSingleItemOutput(new ItemStack(Items.ARROW))
+                .withFluidOutputs(fluid)
                 .build(consumer);
         });
     }
