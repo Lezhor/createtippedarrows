@@ -1,0 +1,13 @@
+{
+  "itemGroup.createtippedarrows": "Example Mod Tab",
+  "block.createtippedarrows.example_block": "Example Block",
+  "item.createtippedarrows.example_item": "Example Item",
+
+  "createtippedarrows.configuration.title": "Create: Tipped Arrows Configs",
+  "createtippedarrows.configuration.section.createtippedarrows.common.toml": "Create: Tipped Arrows Configs",
+  "createtippedarrows.configuration.section.createtippedarrows.common.toml.title": "Create: Tipped Arrows Configs",
+  "createtippedarrows.configuration.items": "Item List",
+  "createtippedarrows.configuration.logDirtBlock": "Log Dirt Block",
+  "createtippedarrows.configuration.magicNumberIntroduction": "Magic Number Text",
+  "createtippedarrows.configuration.magicNumber": "Magic Number"
+}
