@@ -20,9 +20,9 @@ public class CreateTippedArrows {
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::gatherData);
 
-        NeoForge.EVENT_BUS.register(this);
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
+
 
     private void commonSetup(FMLCommonSetupEvent event) {
         LOGGER.info("HELLO FROM COMMON SETUP");

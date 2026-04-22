@@ -17,20 +17,28 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public class ModRecipes {
+/**
+ * This method iterates through all potions and generates a Spout filling recipe for each.
+ */
+public static void generateTippedArrowRecipes(RecipeOutput consumer) {
+    // In DataGen, the config might not be loaded yet. We use a fallback if it's not available.
+    int amount = 25;
+    try {
+        amount = Config.TIPPED_ARROW_REQUIRED_FILL_AMOUNT.get();
+    } catch (IllegalStateException e) {
+        // Config not loaded, use default
+    }
 
-    /**
-     * This method iterates through all potions and generates a Spout filling recipe for each.
-     */
-    public static void generateTippedArrowRecipes(RecipeOutput consumer) {
-        int amount = Config.TIPPED_ARROW_REQUIRED_FILL_AMOUNT.get();
+    final int finalAmount = amount;
+    BuiltInRegistries.POTION.asHolderIdMap().forEach(potionHolder -> {
+        PotionContents contents = new PotionContents(potionHolder);
 
-        BuiltInRegistries.POTION.asHolderIdMap().forEach(potionHolder -> {
-            PotionContents contents = new PotionContents(potionHolder);
-            
-            ItemStack output = new ItemStack(Items.TIPPED_ARROW);
-            output.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, contents);
+        // Create the output Tipped Arrow
+        ItemStack output = new ItemStack(Items.TIPPED_ARROW);
+        output.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, contents);
 
-            FluidStack fluid = PotionFluid.of(amount, contents, PotionFluid.BottleType.REGULAR);
+        // Define the fluid
+        FluidStack fluid = PotionFluid.of(finalAmount, contents, PotionFluid.BottleType.REGULAR);
 
             ResourceLocation potionId = potionHolder.getRegisteredName() != null 
                 ? ResourceLocation.parse(potionHolder.getRegisteredName()) 
