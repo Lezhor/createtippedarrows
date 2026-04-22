@@ -3,7 +3,10 @@ package com.lezhor.createtippedarrows.registration;
 import com.lezhor.createtippedarrows.Config;
 import com.lezhor.createtippedarrows.CreateTippedArrows;
 import com.simibubi.create.content.fluids.potion.PotionFluid;
+import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.fluids.transfer.FillingRecipe;
+import com.simibubi.create.content.kinetics.crusher.CrushingRecipe;
+import com.simibubi.create.content.kinetics.fan.processing.SplashingRecipe;
 import com.simibubi.create.content.processing.recipe.StandardProcessingRecipe;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -13,11 +16,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.fluids.FluidStack;
-import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
-import com.simibubi.create.content.kinetics.fan.processing.SplashingRecipe;
 import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
+import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.crafting.DataComponentFluidIngredient;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
@@ -110,6 +111,17 @@ public static void generateTippedArrowRecipes(RecipeOutput consumer) {
             ResourceLocation.fromNamespaceAndPath(CreateTippedArrows.MODID, "washing_tipped_arrow"))
             .withItemIngredients(CompoundIngredient.of(ingredients.toArray(Ingredient[]::new)))
             .withSingleItemOutput(new ItemStack(Items.ARROW))
+            .build(consumer);
+    }
+
+    /**
+     * This method generates crushing recipes.
+     */
+    public static void generateCrushingRecipes(RecipeOutput consumer) {
+        new StandardProcessingRecipe.Builder<>(CrushingRecipe::new, 
+                ResourceLocation.fromNamespaceAndPath(CreateTippedArrows.MODID, "crushing_spectral_arrow"))
+            .withItemIngredients(Ingredient.of(Items.SPECTRAL_ARROW))
+            .withSingleItemOutput(new ItemStack(Items.GLOWSTONE_DUST))
             .build(consumer);
     }
 }

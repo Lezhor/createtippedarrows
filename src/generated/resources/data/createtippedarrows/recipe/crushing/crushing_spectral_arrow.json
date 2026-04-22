@@ -1,0 +1,13 @@
+{
+  "type": "create:crushing",
+  "ingredients": [
+    {
+      "item": "minecraft:spectral_arrow"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:glowstone_dust"
+    }
+  ]
+}

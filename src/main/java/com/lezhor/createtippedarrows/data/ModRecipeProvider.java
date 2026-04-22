@@ -18,5 +18,6 @@ public class ModRecipeProvider extends RecipeProvider {
         ModRecipes.generateTippedArrowRecipes(output);
         ModRecipes.generateTippedArrowEmptyingRecipes(output);
         ModRecipes.generateTippedArrowWashingRecipes(output);
+        ModRecipes.generateCrushingRecipes(output);
     }
 }
