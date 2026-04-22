@@ -190,21 +190,24 @@ publishMods {
     type = STABLE
     version = "$mod_version"
     displayName = "$mod_name $mod_version for mc$minecraft_version"
-    modLoaders.add("neoforge")
+
     modrinth {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
         projectId = "NwYNtXzG"
         minecraftVersions.add(minecraft_version)
+        modLoaders.add("neoforge")
         requires {
             slug = "create"
         }
     }
+
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
         projectId = "1521802"
         minecraftVersions.add(minecraft_version)
+        modLoaders.add("neoforge")
         requires {
-            slug = "create"
+            projectId = "328085" // Create
         }
     }
 }
