@@ -188,29 +188,24 @@ publishMods {
     file = jar.archiveFile
     changelog = providers.environmentVariable("CHANGELOG").getOrElse("New Version for mc$minecraft_version")
     type = STABLE
-    version = "$mod_version"
+    version = "$mod_version+mc$minecraft_version"
     displayName = "$mod_name $mod_version for mc$minecraft_version"
+    modLoaders.add("neoforge")
 
     modrinth {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
         projectId = "NwYNtXzG"
         minecraftVersions.add(minecraft_version)
-        modLoaders.add("neoforge")
-        requires {
-            slug = "create"
-            versionRange = "[0.6.0,)" 
-        }
+
+        requires("create")
     }
 
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
         projectId = "1521802"
         minecraftVersions.add(minecraft_version)
-        modLoaders.add("neoforge")
-        requires {
-            projectId = "328085" // Create
-            versionRange = "[0.6.0,)"
-        }
+
+        requires("create")
     }
 }
 
