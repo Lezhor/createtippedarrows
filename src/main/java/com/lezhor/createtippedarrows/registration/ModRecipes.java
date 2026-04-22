@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.fluids.FluidStack;
 import com.simibubi.create.content.fluids.transfer.EmptyingRecipe;
 import com.simibubi.create.content.kinetics.fan.processing.SplashingRecipe;
+import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import net.neoforged.neoforge.common.crafting.DataComponentIngredient;
 import net.neoforged.neoforge.fluids.crafting.DataComponentFluidIngredient;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
@@ -98,9 +99,16 @@ public static void generateTippedArrowRecipes(RecipeOutput consumer) {
      * This method generates a washing (splashing) recipe to clean tipped arrows.
      */
     public static void generateTippedArrowWashingRecipes(RecipeOutput consumer) {
+        java.util.List<Ingredient> ingredients = new java.util.ArrayList<>();
+        BuiltInRegistries.POTION.asHolderIdMap().forEach(potion -> {
+            ItemStack stack = new ItemStack(Items.TIPPED_ARROW);
+            stack.set(net.minecraft.core.component.DataComponents.POTION_CONTENTS, new PotionContents(potion));
+            ingredients.add(DataComponentIngredient.of(false, stack));
+        });
+
         new StandardProcessingRecipe.Builder<>(SplashingRecipe::new, 
             ResourceLocation.fromNamespaceAndPath(CreateTippedArrows.MODID, "washing_tipped_arrow"))
-            .withItemIngredients(Ingredient.of(Items.TIPPED_ARROW))
+            .withItemIngredients(CompoundIngredient.of(ingredients.toArray(Ingredient[]::new)))
             .withSingleItemOutput(new ItemStack(Items.ARROW))
             .build(consumer);
     }
