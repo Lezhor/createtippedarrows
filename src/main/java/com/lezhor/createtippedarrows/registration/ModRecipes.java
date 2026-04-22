@@ -14,6 +14,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.crafting.DataComponentFluidIngredient;
 import net.neoforged.neoforge.fluids.crafting.SizedFluidIngredient;
 
 public class ModRecipes {
@@ -48,7 +49,7 @@ public static void generateTippedArrowRecipes(RecipeOutput consumer) {
             new StandardProcessingRecipe.Builder<>(FillingRecipe::new, 
                 ResourceLocation.fromNamespaceAndPath(CreateTippedArrows.MODID, "tipping_" + potionId.getPath()))
                 .withItemIngredients(Ingredient.of(Items.ARROW))
-                .withFluidIngredients(SizedFluidIngredient.of(fluid))
+                .withFluidIngredients(new SizedFluidIngredient(DataComponentFluidIngredient.of(false, fluid), fluid.getAmount()))
                 .withSingleItemOutput(output)
                 .build(consumer);
         });
