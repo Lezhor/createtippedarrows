@@ -10,9 +10,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
-// This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = CreateTippedArrows.MODID, dist = Dist.CLIENT)
-// You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
 @EventBusSubscriber(modid = CreateTippedArrows.MODID, value = Dist.CLIENT)
 public class CreateTippedArrowsClient {
     public CreateTippedArrowsClient(ModContainer container) {
@@ -24,8 +22,5 @@ public class CreateTippedArrowsClient {
 
     @SubscribeEvent
     static void onClientSetup(FMLClientSetupEvent event) {
-        // Some client setup code
-        CreateTippedArrows.LOGGER.info("HELLO FROM CLIENT SETUP");
-        CreateTippedArrows.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
     }
 }
