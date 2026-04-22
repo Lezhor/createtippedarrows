@@ -198,6 +198,7 @@ publishMods {
         modLoaders.add("neoforge")
         requires {
             slug = "create"
+            versionRange = "[0.6.0,)" 
         }
     }
 
@@ -208,6 +209,7 @@ publishMods {
         modLoaders.add("neoforge")
         requires {
             projectId = "328085" // Create
+            versionRange = "[0.6.0,)"
         }
     }
 }
