@@ -202,7 +202,7 @@ publishMods {
 
     curseforge {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
-        projectId = "1521802"
+        projectId = "1522000"
         minecraftVersions.add(minecraft_version)
 
         requires("create")
