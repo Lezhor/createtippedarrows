@@ -1,0 +1,13 @@
+{
+  "type": "create:splashing",
+  "ingredients": [
+    {
+      "item": "minecraft:tipped_arrow"
+    }
+  ],
+  "results": [
+    {
+      "id": "minecraft:arrow"
+    }
+  ]
+}
